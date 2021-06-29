@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   
    # 半角英数字混合
-  validates :password, format: { with: /\A[a-z0-9]+\z/i, message: "is invalid. Include both letters and numbers" }
+  validates :password, format: { with: /\A(?=.*?[a-zA-Z])(?=.*?\d)[a-zA-Z\d]+\z/i, message: "is invalid. Include both letters and numbers" }
   # 複数のカラムにバリデーション
   with_options presence: true do
     validates :nickname
