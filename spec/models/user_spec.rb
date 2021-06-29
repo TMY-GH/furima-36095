@@ -25,7 +25,7 @@ RSpec.describe User, type: :model do
       it 'メールアドレスに＠がない' do
         @user.email = 'test.com'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Email is invalid")
+        expect(@user.errors.full_messages).to include('Email is invalid')
       end
       it 'メールアドレスが既に使われている' do
         @another_user = FactoryBot.create(:user)
