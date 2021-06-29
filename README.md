@@ -15,7 +15,6 @@
 ### Association
 
 - has_many :items
-- has_one :addresses
 - has_many :solditems
 
 ## Itemsテーブル
@@ -33,7 +32,6 @@
 
 ### Association
 - belongs_to :user
-- has_one :address
 - has_one :solditem
 
 ## Addressesテーブル
@@ -47,8 +45,7 @@
 | phone_number       | string      | null: false              |
 
 ### Association
-- belongs_to :user
-- belongs_to :item
+- has_one :solditem
 
 
 ## SoldItemsテーブル
@@ -60,3 +57,4 @@
 ### Association
 - belongs_to :user
 - belongs_to :item
+- belongs_to :address
