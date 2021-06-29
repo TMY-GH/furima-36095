@@ -27,7 +27,8 @@ class Item < ApplicationRecord
     validates :category_id
     validates :status_id
     validates :shipping_fee_id
-    validates :prefecture_id
+    #都道府県だけid:0からスタート
+    validates :prefecture_id, numericality: { other_than: 0 }
     validates :delivery_days_id
   end
   # 価格は¥300~¥9,999,999の間
