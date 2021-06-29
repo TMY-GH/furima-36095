@@ -6,7 +6,7 @@ class User < ApplicationRecord
 
   # Association
   has_many :items
-  
+
   # 半角英数字混合
   validates :password,
             format: { with: /\A(?=.*?[a-zA-Z])(?=.*?\d)[a-zA-Z\d]+\z/i, message: 'is invalid. Include both letters and numbers' }
@@ -32,5 +32,4 @@ class User < ApplicationRecord
     validates :last_name_kana
     validates :first_name_kana
   end
-
 end
