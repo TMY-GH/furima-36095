@@ -18,16 +18,16 @@
 - has_many :solditems
 
 ## Itemsテーブル
-| Column             | Type        | Option                   |
-| -------------------|-------------|--------------------------|
-| name               | string      | null: false              |
-| info               | text        | null: false              |
-| category_id        | integer     | null: false              |
-| status_id          | integer     | null: false              |
-| shipping_fee_id    | integer     | null: false              |
-| prefecture_id      | integer     | null: false              |
-| delivery_days_id   | integer     | null: false              |
-| price              | integer     | null: false              |
+| Column             | Type        | Option                         |
+| -------------------|-------------|--------------------------------|
+| name               | string      | null: false                    |
+| info               | text        | null: false                    |
+| category_id        | integer     | null: false                    |
+| status_id          | integer     | null: false                    |
+| shipping_fee_id    | integer     | null: false                    |
+| prefecture_id      | integer     | null: false                    |
+| delivery_days_id   | integer     | null: false                    |
+| price              | integer     | null: false                    |
 | user               | references  | null: false, foreign_key: true |
 
 ### Association
@@ -45,7 +45,7 @@
 | phone_number       | string      | null: false              |
 
 ### Association
-- has_one :solditem
+- belongs_to :solditem
 
 
 ## SoldItemsテーブル
@@ -57,4 +57,4 @@
 ### Association
 - belongs_to :user
 - belongs_to :item
-- belongs_to :address
+- has_one :address
