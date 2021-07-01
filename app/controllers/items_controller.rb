@@ -24,11 +24,11 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    @item = Item.find(params[:id])
+    set_item
   end
 
   def update
-    @item = Item.find(params[:id])
+    set_item
     if @item.update(item_params)
       redirect_to show
     else
@@ -44,10 +44,13 @@ class ItemsController < ApplicationController
   end
 
   def access_rule
-    accepted_user = Item.find(params[:id]).user
-    if accepted_user != current_user
+    if set_item.user != current_user
       redirect_to root_path
     end
+  end
+
+  def set_item
+    @item = Item.find(params[:id])
   end
 
 end
