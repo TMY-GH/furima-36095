@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   # Association
   has_many :items
+  has_many :solditems
 
   # 半角英数字混合
   validates :password,
