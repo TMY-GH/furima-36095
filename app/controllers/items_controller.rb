@@ -1,13 +1,13 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :access_rule, only: [:edit, :update]
+  before_action :set_item, only: [:show, :edit, :update]
 
   def index
     @items = Item.all.order('created_at DESC')
   end
 
   def show
-    @item = Item.find(params[:id])
   end
 
   def new
@@ -24,11 +24,9 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    set_item
   end
 
   def update
-    set_item
     if @item.update(item_params)
       redirect_to show
     else
