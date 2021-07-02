@@ -33,7 +33,7 @@ class Item < ApplicationRecord
     validates :delivery_days_id
   end
   # 価格は¥300~¥9,999,999の間
-  validates :price, numericality: { greater_than_or_equal_to: 300, less_than: 1_000_000 }
+  validates :price, numericality: { greater_than_or_equal_to: 300, less_than: 10_000_000 }
   # 価格は半角数字
   validates :price, format: { with: /\A[0-9]+\z/ }
 end
