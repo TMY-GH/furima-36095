@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :access_rule, only: [:edit, :update, :destroy]
   before_action :set_item, only: [:show, :edit, :update, :destroy]
+  before_action :access_rule, only: [:edit, :update, :destroy]
 
   def index
     @items = Item.all.order('created_at DESC')
@@ -30,7 +30,7 @@ class ItemsController < ApplicationController
     if @item.update(item_params)
       redirect_to action: :show
     else
-      render :new 
+      render :new
     end
   end
 
@@ -42,18 +42,19 @@ class ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:image, :name, :info, :category_id, :status_id, :shipping_fee_id, :prefecture_id,
-                                 :delivery_days_id, :price).merge(user_id: current_user.id)
+    params
+      .require(:item)
+      .permit(:image, :name, :info, :category_id, :status_id, :shipping_fee_id,
+              :prefecture_id, :delivery_days_id, :price)
+      .merge(user_id: current_user.id)
   end
 
   def access_rule
-    if set_item.user != current_user
-      redirect_to root_path
-    end
+    # 本人以外の編集||売却済み商品
+    redirect_to root_path if @item.user != current_user || @item.solditem
   end
 
   def set_item
     @item = Item.find(params[:id])
   end
-
 end
