@@ -30,7 +30,7 @@ class ItemsController < ApplicationController
     if @item.update(item_params)
       redirect_to action: :show
     else
-      render :new 
+      render :new
     end
   end
 
@@ -45,19 +45,16 @@ class ItemsController < ApplicationController
     params
       .require(:item)
       .permit(:image, :name, :info, :category_id, :status_id, :shipping_fee_id,
-              :prefecture_id,:delivery_days_id, :price)
+              :prefecture_id, :delivery_days_id, :price)
       .merge(user_id: current_user.id)
   end
 
   def access_rule
     # 本人以外の編集||売却済み商品
-    if set_item.user != current_user || set_item.solditem
-      redirect_to root_path
-    end
+    redirect_to root_path if set_item.user != current_user || set_item.solditem
   end
 
   def set_item
     @item = Item.find(params[:id])
   end
-
 end

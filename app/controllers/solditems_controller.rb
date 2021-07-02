@@ -11,8 +11,8 @@ class SolditemsController < ApplicationController
     if @solditem_address.valid?
       Payjp.api_key = ENV['PAYJP_SECRET_KEY']  # 自身のPAY.JPテスト秘密鍵を記述しましょう
       Payjp::Charge.create(
-        amount: @item.price,  # 商品の値段
-        card: params[:token],    # カードトークン
+        amount: @item.price, # 商品の値段
+        card: params[:token], # カードトークン
         currency: 'jpy'                 # 通貨の種類（日本円）
       )
       @solditem_address.save
@@ -23,6 +23,7 @@ class SolditemsController < ApplicationController
   end
 
   private
+
   def solditem_address_params
     params
       .require(:solditem_address)
