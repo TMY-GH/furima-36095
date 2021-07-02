@@ -42,12 +42,16 @@ class ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:image, :name, :info, :category_id, :status_id, :shipping_fee_id, :prefecture_id,
-                                 :delivery_days_id, :price).merge(user_id: current_user.id)
+    params
+      .require(:item)
+      .permit(:image, :name, :info, :category_id, :status_id, :shipping_fee_id,
+              :prefecture_id,:delivery_days_id, :price)
+      .merge(user_id: current_user.id)
   end
 
   def access_rule
-    if set_item.user != current_user
+    # 本人以外の編集||売却済み商品
+    if set_item.user != current_user || set_item.solditem
       redirect_to root_path
     end
   end

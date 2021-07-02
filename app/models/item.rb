@@ -1,7 +1,7 @@
 class Item < ApplicationRecord
   # Association
   belongs_to :user
-  has_one :solditems
+  has_one :solditem
 
   has_one_attached :image
   extend ActiveHash::Associations::ActiveRecordExtensions
