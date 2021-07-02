@@ -91,6 +91,16 @@ RSpec.describe SolditemAddress, type: :model do
         @sia.valid?
         expect(@sia.errors.full_messages).to include('Phone number is invalid. Input only number')
       end
+      it 'user_idが空' do
+        @sia.user_id = nil
+        @sia.valid?
+        expect(@sia.errors.full_messages).to include("User can't be blank")
+      end
+      it 'item_idが空' do
+        @sia.item_id = nil
+        @sia.valid?
+        expect(@sia.errors.full_messages).to include("Item can't be blank")
+      end
     end
   end
 end
