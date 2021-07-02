@@ -1,8 +1,5 @@
 FactoryBot.define do
   factory :solditem_address do
-    association :user_id
-    association :item_id
-    association :solditem_id
     token           { 'token1234567890' }
     post_number     { '123-1234' }
     prefecture_id   { 1 }
