@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :access_rule, only: [:edit, :update, :destroy]
   before_action :set_item, only: [:show, :edit, :update, :destroy]
+  before_action :access_rule, only: [:edit, :update, :destroy]
 
   def index
     @items = Item.all.order('created_at DESC')
@@ -51,7 +51,7 @@ class ItemsController < ApplicationController
 
   def access_rule
     # 本人以外の編集||売却済み商品
-    redirect_to root_path if set_item.user != current_user || set_item.solditem
+    redirect_to root_path if @item.user != current_user || @item.solditem
   end
 
   def set_item
